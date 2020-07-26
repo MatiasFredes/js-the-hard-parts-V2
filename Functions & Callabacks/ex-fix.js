@@ -64,16 +64,44 @@ console.log(mapWith([1, 2, 3], addTwo));
 
 // Challenge 6
 function reduce(array, callback, initialValue) {
-
+    let accumulator = initialValue;
+    for (let index = 0; index < array.length; index++) {
+        accumulator = callback(accumulator, array[index])
+    }
+    return accumulator;
 }
 
+const nums = [4, 1, 3];
+const add = function(a, b) { return a + b; }
+console.log(reduce(nums, add, 0));   //-> 8
 
 // Challenge 7
-function intersection(arrays) {
-
+function intersection(...arrays) {
+    const output = [];
+    const cache = reduce(arrays, addRepeated, {});
+    for (const key in cache) {
+        if (cache.hasOwnProperty(key)) {
+            if(cache[key] === arrays.length)
+                output.push(key);
+        }
+    }
+    return output;
 }
 
-// console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]));
+function addRepeated(cache, array) {
+    const internCache = {};
+    for (const number of array) {
+        if(cache[number] && !internCache[number])
+            cache[number] += 1;
+        else {
+            internCache[number] = 1;
+            cache[number] = 1;
+        }
+    }
+    return cache;
+}
+
+console.log(intersection([5, 10, 15, 20, 1], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20], [1]));
 // should log: [5, 15]
 
 
