@@ -178,13 +178,20 @@ console.log(objectFilter(cities, city => city.toUpperCase()))
 
 // Challenge 12
 function majority(array, callback) {
-
+    const result = {
+        'true': 0,
+        'false': 0
+    };
+    for (const element of array) {
+        callback(element) ? result['true']++ : result['false']++;
+    }
+    return result['true'] > result['false'];
 }
 
 // /*** Uncomment these to check your work! ***/
-// const isOdd = function(num) { return num % 2 === 1; };
-// console.log(majority([1, 2, 3, 4, 5], isOdd)); // should log: true
-// console.log(majority([2, 3, 4, 5], isOdd)); // should log: false
+const isOdd = function(num) { return num % 2 === 1; };
+console.log(majority([1, 2, 3, 4, 5], isOdd)); // should log: true
+console.log(majority([2, 3, 4, 5], isOdd)); // should log: false
 
 
 // Challenge 13
@@ -333,9 +340,9 @@ function myFunc(array, callback) {
 const numbers = [2, 3, 6, 64, 10, 8, 12];
 const evens = [2, 4, 6, 8, 10, 12, 64];
 
-function isOdd(num) {
-  return (num % 2 !== 0);
-}
+//function isOdd(num) {
+  //return (num % 2 !== 0);
+//}
 
 // /*** Uncomment these to check your work! ***/
 // console.log(myFunc(numbers, isOdd)); // Output should be 1
