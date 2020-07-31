@@ -196,36 +196,58 @@ console.log(majority([2, 3, 4, 5], isOdd)); // should log: false
 
 // Challenge 13
 function prioritize(array, callback) {
-
+    const correctItems = []; 
+    const discardedItems = []; 
+    for(let index = 0; index < array.length; index++ ) {
+        if(callback(array[index])) 
+            correctItems.push(array[index]);
+        else
+            discardedItems.push(array[index]);
+    }
+    return [ ...correctItems, ...discardedItems ];
 }
 
 // /*** Uncomment these to check your work! ***/
-// const startsWithS = function(str) { return str[0] === 's' || str[0] === 'S'; };
-// console.log(prioritize(['curb', 'rickandmorty', 'seinfeld', 'sunny', 'friends'], startsWithS)); // should log:
-['seinfeld', 'sunny', 'curb', 'rickandmorty', 'friends']
+const startsWithS = function(str) { return str[0] === 's' || str[0] === 'S'; };
+console.log(prioritize(['curb', 'rickandmorty', 'seinfeld', 'sunny', 'friends'], startsWithS)); 
+// should log:['seinfeld', 'sunny', 'curb', 'rickandmorty', 'friends']
 
 
 // Challenge 14
 function countBy(array, callback) {
-
+    const output = {};
+    for (const element of array) {
+        const key = callback(element);
+        if(output[key])
+            output[key]++;
+        else
+        output[key] = 1;
+    }
+    return output;
 }
 
 // /*** Uncomment these to check your work! ***/
-// console.log(countBy([1, 2, 3, 4, 5], function(num) {
-// if (num % 2 === 0) return 'even';
-// else return 'odd';
-// })); // should log: { odd: 3, even: 2 }
-
+console.log(countBy([1, 2, 3, 4, 5], function(num) {
+if (num % 2 === 0) return 'even';
+else return 'odd';
+}));
+  // should log: { odd: 3, even: 2 }
 
 // Challenge 15
 function groupBy(array, callback) {
-
+    const output = {};
+    for (const element of array) {
+        const key = callback(element);
+        output[key] ? output[key].push(element) : output[key] = [element];
+    }
+    return output;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const decimals = [1.3, 2.1, 2.4];
-// const floored = function(num) { return Math.floor(num); };
-// console.log(groupBy(decimals, floored)); // should log: { 1: [1.3], 2: [2.1, 2.4] }
+const decimals = [1.3, 2.1, 2.4];
+const floored = function(num) { return Math.floor(num); };
+console.log(groupBy(decimals, floored)); 
+// should log: { 1: [1.3], 2: [2.1, 2.4] }
 
 
 // Challenge 16
