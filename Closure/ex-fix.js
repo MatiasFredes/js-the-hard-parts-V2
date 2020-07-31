@@ -3,24 +3,25 @@ console.log('Hello, world!');
 
 // CHALLENGE 1
 function createFunction() {
+  return () => console.log('hello');
 
 }
 
 // /*** Uncomment these to check your work! ***/
-// const function1 = createFunction();
-// function1(); // => should console.log('hello');
+ const function1 = createFunction();
+ function1(); // => should console.log('hello');
 
 
 // CHALLENGE 2
 function createFunctionPrinter(input) {
-
+  return () => console.log(input);
 }
 
 // /*** Uncomment these to check your work! ***/
-// const printSample = createFunctionPrinter('sample');
-// printSample(); // => should console.log('sample');
-// const printHello = createFunctionPrinter('hello');
-// printHello(); // => should console.log('hello');
+const printSample = createFunctionPrinter('sample');
+printSample(); // => should console.log('sample');
+const printHello = createFunctionPrinter('hello');
+printHello(); // => should console.log('hello');
 
 
 // CHALLENGE 3

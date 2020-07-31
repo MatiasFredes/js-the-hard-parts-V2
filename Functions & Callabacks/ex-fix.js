@@ -106,43 +106,74 @@ console.log(intersection([5, 10, 15, 20, 1], [15, 88, 1, 5, 7], [1, 10, 15, 5, 2
 
 
 // Challenge 8
-function union(arrays) {
-
+function union(...arrays) {
+    return reduce(arrays, addElement, []);
 }
 
-// console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+function addElement(output, array) {
+    for (const element of array) {
+        if(!output.includes(element))
+        output.push(element);
+    }
+    return output;
+}
+
+console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
 
 
 // Challenge 9
 function objOfMatches(array1, array2, callback) {
-
+    const output = {};
+    for(let index = 0; index < array1.length; index++) {
+        const result = callback(array1[index]);
+        if(array2[index] === result) 
+            output[array1[index]] = result;       
+    }
+    return output;
 }
 
-// console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], function(str) { return str.toUpperCase(); }));
+console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], function(str) { return str.toUpperCase(); }));
 // should log: { hi: 'HI', bye: 'BYE', later: 'LATER' }
 
 
 // Challenge 10
 function multiMap(arrVals, arrCallbacks) {
-
+    const output = {};
+    for(let i = 0; i < arrVals.length; i++) {
+        const arr = [];
+        for(let j = 0; j < arrCallbacks.length; j++) {
+            arr.push(arrCallbacks[j](arrVals[i]));
+        }
+        output[arrVals[i]] = arr;
+    }
+    return output;
 }
 
-// console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
+console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
 // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
 
 
 // Challenge 11
 function objectFilter(obj, callback) {
-
+    const output = {};
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const resultFilter = callback(obj[key]);
+            if(obj[key] === resultFilter)
+                output[key] = resultFilter;
+        }
+    }
+    return output;
 }
 
-// const cities = {
-// London: 'LONDON',
-// LA: 'Los Angeles',
-// Paris: 'PARIS',
-// };
-// console.log(objectFilter(cities, city => city.toUpperCase())) // Should log { London: 'LONDON', Paris: 'PARIS'}
+const cities = {
+London: 'LONDON',
+LA: 'Los Angeles',
+Paris: 'PARIS',
+};
+console.log(objectFilter(cities, city => city.toUpperCase())) 
+// Should log { London: 'LONDON', Paris: 'PARIS'}
 
 
 // Challenge 12
