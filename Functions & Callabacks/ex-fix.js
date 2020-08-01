@@ -374,46 +374,60 @@ console.log(highestFunc(groupOfFuncs, -20)); // should log: 'inverse'
 
 // Challenge 22
 function combineOperations(startVal, arrOfFuncs) {
-
+    let accumulator = startVal;
+    for (const func of arrOfFuncs) {
+        accumulator = func(accumulator);
+    }
+    return accumulator;
 }
 
 function add100(num) {
-  return num + 100;
+    return num + 100;
 }
 
 function divByFive(num) {
-  return num / 5;
+    return num / 5;
 }
 
 function multiplyByThree(num) {
-  return num * 3;
+    return num * 3;
+}
+
+function multiplyFive(num) {
+    return num * 5;
+}
+
+function addTen(num) {
+    return num + 10;
 }
 
 // /*** Uncomment these to check your work! ***/
-// console.log(combineOperations(0, [add100, divByFive, multiplyByThree])); // Should output 60 -->
-// console.log(combineOperations(0, [divByFive, multiplyFive, addTen])); // Should output 10
+console.log(combineOperations(0, [add100, divByFive, multiplyByThree])); // Should output 60 -->
+console.log(combineOperations(0, [divByFive, multiplyFive, addTen])); // Should output 10
 
 
 // Challenge 23
 function myFunc(array, callback) {
-
+    for (let index = 0; index < array.length; index++) {
+        if(callback(array[index]))
+            return index;
+    }
+    return -1;
 }
 
 const numbers = [2, 3, 6, 64, 10, 8, 12];
 const evens = [2, 4, 6, 8, 10, 12, 64];
 
-//function isOdd(num) {
-  //return (num % 2 !== 0);
-//}
-
 // /*** Uncomment these to check your work! ***/
-// console.log(myFunc(numbers, isOdd)); // Output should be 1
-// console.log(myFunc(evens, isOdd)); // Output should be -1
+console.log(myFunc(numbers, isOdd)); // Output should be 1
+console.log(myFunc(evens, isOdd)); // Output should be -1
 
 
 // Challenge 24
 function myForEach(array, callback) {
-
+    for (let index = 0; index < array.length; index++) {
+        callback(array[index]);
+    }
 }
 
 let sum = 0;
@@ -423,6 +437,6 @@ function addToSum(num) {
 }
 
 // /*** Uncomment these to check your work! ***/
-// const nums = [1, 2, 3];
-// myForEach(nums, addToSum);
-// console.log(sum); // Should output 6
+const myNums = [1, 2, 3];
+myForEach(myNums, addToSum);
+console.log(sum); // Should output 6
