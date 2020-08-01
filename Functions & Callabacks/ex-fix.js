@@ -326,30 +326,50 @@ console.log(rating(checks, 66)); // should log: 75
 
 // Challenge 20
 function pipe(arrOfFuncs, value) {
-
+    for (let index = 0; index < arrOfFuncs.length; index++) {
+        value = arrOfFuncs[index](value);
+    }
+    return value;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const capitalize = str => str.toUpperCase();
-// const addLowerCase = str => str + str.toLowerCase();
-// const repeat = str => str + str;
-// const capAddlowRepeat = [capitalize, addLowerCase, repeat];
-// console.log(pipe(capAddlowRepeat, 'cat')); // should log: 'CATcatCATcat'
+const capitalize = str => str.toUpperCase();
+const addLowerCase = str => str + str.toLowerCase();
+const repeat = str => str + str;
+const capAddlowRepeat = [capitalize, addLowerCase, repeat];
+console.log(pipe(capAddlowRepeat, 'cat')); // should log: 'CATcatCATcat'
 
 
 // Challenge 21
 function highestFunc(objOfFuncs, subject) {
-
+    let highest;
+    let func;
+    for (const key in objOfFuncs) {
+        if (objOfFuncs.hasOwnProperty(key)) {
+            if(highest === undefined) {
+                func = key;
+                highest = objOfFuncs[key](subject);
+            }
+            else {
+                const result = objOfFuncs[key](subject);
+                if( result > highest) {
+                    func = key;
+                    highest = result;
+                }
+            }
+        }
+    }
+    return func;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const groupOfFuncs = {};
-// groupOfFuncs.double = n => n * 2;
-// groupOfFuncs.addTen = n => n + 10;
-// groupOfFuncs.inverse = n => n * -1;
-// console.log(highestFunc(groupOfFuncs, 5)); // should log: 'addTen'
-// console.log(highestFunc(groupOfFuncs, 11)); // should log: 'double'
-// console.log(highestFunc(groupOfFuncs, -20)); // should log: 'inverse'
+const groupOfFuncs = {};
+groupOfFuncs.double = n => n * 2;
+groupOfFuncs.addTen = n => n + 10;
+groupOfFuncs.inverse = n => n * -1;
+console.log(highestFunc(groupOfFuncs, 5)); // should log: 'addTen'
+console.log(highestFunc(groupOfFuncs, 11)); // should log: 'double'
+console.log(highestFunc(groupOfFuncs, -20)); // should log: 'inverse'
 
 
 // Challenge 22
