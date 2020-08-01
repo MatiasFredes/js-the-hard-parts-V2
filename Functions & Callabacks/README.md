@@ -73,7 +73,7 @@ Create a function `commutative` that accepts two callbacks and a value. `commuta
 ## Challenge 18
 Create a function `objFilter` that accepts an object and a callback. `objFilter` should make a new object, and then iterate through the passed-in object, using each key as input for the callback. If the output from the callback is equal to the corresponding value, then that key-value pair is copied into the new object. `objFilter` will return this new object.
 
-##Challenge 19
+## Challenge 19
 Create a function `rating` that accepts an array (of functions) and a value. All the functions in the array will return `true` or `false`. `rating` should return the percentage of functions from the array that return true when the value is used as input.
 
 ## Challenge 20
