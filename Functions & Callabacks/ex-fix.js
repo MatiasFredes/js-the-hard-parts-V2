@@ -285,31 +285,43 @@ console.log(commutative(divBy4, subtract5, 48)); // should log: false
 
 // Challenge 18
 function objFilter(obj, callback) {
-
+    const output = {};
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if(obj[key] === callback(Number(key)))
+                output[key] = obj[key];
+        }
+    }
+    return output;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const startingObj = {};
-// startingObj[6] = 3;
-// startingObj[2] = 1;
-// startingObj[12] = 4;
-// const half = n => n / 2;
-// console.log(objFilter(startingObj, half)); // should log: { 2: 1, 6: 3 }
+const startingObj = {};
+startingObj[6] = 3;
+startingObj[2] = 1;
+startingObj[12] = 4;
+const half = n => n / 2;
+console.log(objFilter(startingObj, half)); // should log: { 2: 1, 6: 3 }
 
 
 // Challenge 19
 function rating(arrOfFuncs, value) {
-
+    let counter = 0;
+    for (const func of arrOfFuncs) {
+        if(func(value))
+            counter++;
+    }
+    return (counter * 100) / arrOfFuncs.length;
 }
 
 // /*** Uncomment these to check your work! ***/
-// const isEven = n => n % 2 === 0;
-// const greaterThanFour = n => n > 4;
-// const isSquare = n => Math.sqrt(n) % 1 === 0;
-// const hasSix = n => n.toString().includes('6');
-// const checks = [isEven, greaterThanFour, isSquare, hasSix];
-// console.log(rating(checks, 64)); // should log: 100
-// console.log(rating(checks, 66)); // should log: 75
+const isEven = n => n % 2 === 0; 
+const greaterThanFour = n => n > 4;
+const isSquare = n => Math.sqrt(n) % 1 === 0;
+const hasSix = n => n.toString().includes('6');
+const checks = [isEven, greaterThanFour, isSquare, hasSix];
+console.log(rating(checks, 64)); // should log: 100
+console.log(rating(checks, 66)); // should log: 75
 
 
 // Challenge 20
